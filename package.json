@@ -1,0 +1,26 @@
+{
+  "name": "file_storage",
+  "version": "1.0.0",
+  "description": "my first microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "Essisten",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "exceljs": "^4.3.0",
+    "express": "^4.18.2",
+    "formidable": "^2.1.1",
+    "fs": "0.0.1-security",
+    "fs-extra": "^11.1.1",
+    "moment-timezone": "^0.5.41",
+    "nodemon": "^2.0.21",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.29.3",
+    "sequelize-auto": "^0.8.8"
+  }
+}
