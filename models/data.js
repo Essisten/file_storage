@@ -82,6 +82,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     repair_cost_preview: {
       type: DataTypes.DECIMAL,
+      get() {
+        const value = this.getDataValue('repair_cost_preview');
+        return value === null ? null : parseFloat(value);
+      },
       allowNull: true,
       defaultValue: 0
     },
@@ -91,16 +95,28 @@ module.exports = function(sequelize, DataTypes) {
     },
     federal_budget: {
       type: DataTypes.DECIMAL,
+      get() {
+        const value = this.getDataValue('federal_budget');
+        return value === null ? null : parseFloat(value);
+      },
       allowNull: true,
       defaultValue: 0
     },
     regional_budget: {
       type: DataTypes.DECIMAL,
+      get() {
+        const value = this.getDataValue('regional_budget');
+        return value === null ? null : parseFloat(value);
+      },
       allowNull: true,
       defaultValue: 0
     },
     local_budget: {
       type: DataTypes.DECIMAL,
+      get() {
+        const value = this.getDataValue('local_budget');
+        return value === null ? null : parseFloat(value);
+      },
       allowNull: true,
       defaultValue: 0
     }

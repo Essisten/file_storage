@@ -1,5 +1,7 @@
 -- public.building_number definition
+
 -- Drop table
+
 -- DROP TABLE public.building_number;
 
 CREATE TABLE public.building_number (
@@ -10,7 +12,9 @@ CREATE TABLE public.building_number (
 
 
 -- public.city_name definition
+
 -- Drop table
+
 -- DROP TABLE public.city_name;
 
 CREATE TABLE public.city_name (
@@ -21,7 +25,9 @@ CREATE TABLE public.city_name (
 
 
 -- public.city_type definition
+
 -- Drop table
+
 -- DROP TABLE public.city_type;
 
 CREATE TABLE public.city_type (
@@ -32,7 +38,9 @@ CREATE TABLE public.city_type (
 
 
 -- public.constructive_element_group definition
+
 -- Drop table
+
 -- DROP TABLE public.constructive_element_group;
 
 CREATE TABLE public.constructive_element_group (
@@ -43,7 +51,9 @@ CREATE TABLE public.constructive_element_group (
 
 
 -- public.file_status definition
+
 -- Drop table
+
 -- DROP TABLE public.file_status;
 
 CREATE TABLE public.file_status (
@@ -54,7 +64,9 @@ CREATE TABLE public.file_status (
 
 
 -- public.founded_address definition
+
 -- Drop table
+
 -- DROP TABLE public.founded_address;
 
 CREATE TABLE public.founded_address (
@@ -65,7 +77,9 @@ CREATE TABLE public.founded_address (
 
 
 -- public.municipal_knowledge definition
+
 -- Drop table
+
 -- DROP TABLE public.municipal_knowledge;
 
 CREATE TABLE public.municipal_knowledge (
@@ -76,7 +90,9 @@ CREATE TABLE public.municipal_knowledge (
 
 
 -- public.street_name definition
+
 -- Drop table
+
 -- DROP TABLE public.street_name;
 
 CREATE TABLE public.street_name (
@@ -87,7 +103,9 @@ CREATE TABLE public.street_name (
 
 
 -- public.street_type definition
+
 -- Drop table
+
 -- DROP TABLE public.street_type;
 
 CREATE TABLE public.street_type (
@@ -98,7 +116,9 @@ CREATE TABLE public.street_type (
 
 
 -- public."data" definition
+
 -- Drop table
+
 -- DROP TABLE public."data";
 
 CREATE TABLE public."data" (
@@ -113,11 +133,11 @@ CREATE TABLE public."data" (
 	building_number int4 NOT NULL,
 	constructive_element_group int4 NOT NULL,
 	capital_repair_year int4 NULL,
-	repair_cost_preview numeric NULL DEFAULT 0,
 	repair_end_year int4 NULL,
-	federal_budget numeric NULL DEFAULT 0,
-	regional_budget numeric NULL DEFAULT 0,
-	local_budget numeric NULL DEFAULT 0,
+	repair_cost_preview numeric(16, 2) NULL DEFAULT 0.00,
+	federal_budget numeric(16, 2) NULL DEFAULT 0.00,
+	regional_budget numeric(16, 2) NULL DEFAULT 0.00,
+	local_budget numeric(16, 2) NULL DEFAULT 0.00,
 	CONSTRAINT data_pk PRIMARY KEY (id),
 	CONSTRAINT data_bn_fk FOREIGN KEY (building_number) REFERENCES public.building_number(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	CONSTRAINT data_ceg_fk FOREIGN KEY (constructive_element_group) REFERENCES public.constructive_element_group(id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -131,15 +151,17 @@ CREATE TABLE public."data" (
 
 
 -- public.files definition
+
 -- Drop table
+
 -- DROP TABLE public.files;
 
 CREATE TABLE public.files (
 	id int4 NOT NULL GENERATED ALWAYS AS IDENTITY,
-	upload_time time NULL,
 	"name" varchar NOT NULL,
 	"path" varchar NOT NULL,
 	status int4 NOT NULL DEFAULT 1,
+	upload_time timestamptz NOT NULL,
 	CONSTRAINT files_pk PRIMARY KEY (id),
 	CONSTRAINT files_fk FOREIGN KEY (status) REFERENCES public.file_status(id)
 );
