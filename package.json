@@ -4,7 +4,7 @@
   "description": "my first microservice",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "test": "node index.js"
   },
   "author": "Essisten",
   "license": "ISC",

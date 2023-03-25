@@ -8,6 +8,8 @@ const error_handler = require('./errors/middleware');
 const Excel = require('exceljs');
 const app = express();
 
+var file_process_lock = false;
+
 app.use(cors());
 app.use(express.json());
 app.use('/api', router)
@@ -32,9 +34,15 @@ start();
 
 const ProcessFiles = async () =>
 {
+    if (file_process_lock)
+        return;
+    file_process_lock = true;
     let files = await models.files.findAll({where: {status: 1}});
     if (files.length == 0)
+    {
+        file_process_lock = false;
         return;
+    }
     await models.data.destroy({where: {}});
     console.log('\nТаблица data очищена');
     for (let file of files)
@@ -96,6 +104,7 @@ const ProcessFiles = async () =>
                 {where: {id: f.id}}
             );
             console.log(`\nОбработка файла ${f.name} завершена успешно.`);
+            file_process_lock = false;
         }
         catch (e)
         {
@@ -105,8 +114,9 @@ const ProcessFiles = async () =>
             );
             console.log(e.message);
             console.log('\nОбработка файла завершилась с ошибкой.');
+            file_process_lock = false;
         }
     }
 }
 ProcessFiles();
-//setInterval(ProcessFiles, 6000);
+setInterval(ProcessFiles, 60000);
