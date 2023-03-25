@@ -1,3 +1,5 @@
+CREATE DATABASE file_storage;
+
 -- public.building_number definition
 
 -- Drop table
